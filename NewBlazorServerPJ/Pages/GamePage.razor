@@ -1,0 +1,62 @@
+﻿@using NewBlazorServerPJ.Data
+@inject IGameServices GameServices
+@page "/gamepage"
+
+<PageTitle>Game List</PageTitle>
+
+<h1>Game List</h1>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Game Name</th>  
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in gameList)
+            {                
+                <tr>
+                    <td>@game.GameName</td>
+                    <td>@game.ReleaseDate?.ToString("dd MMMM yyyy")</td>
+                </tr>               
+            }
+        </tbody>
+    </table>
+
+
+
+@code {
+    private GameModel game = new GameModel();
+    private List<GameModel> gameList = new List<GameModel>();   
+
+    protected override async Task OnInitializedAsync()
+    {              
+        GetAllGameList();
+    }
+ 
+
+    private List<GameModel> GetAllGameList()
+    {               
+        gameList = GameServices.GetGameList();
+        return gameList;
+    }
+
+    private void Save()
+    {
+        GameServices.SaveGame(game);
+        game = new GameModel();        
+        GetAllGameList();  
+    }
+
+    private void Edit(int id)
+    {        
+        game = gameList.FirstOrDefault(g => g.Id == id);            
+    }
+
+    private void Delete(int id)
+    {
+        GameServices.DeleteGame(id);        
+        GetAllGameList();      
+    }
+}
