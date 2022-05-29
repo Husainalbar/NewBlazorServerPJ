@@ -4,13 +4,20 @@
 
 <PageTitle>Game List</PageTitle>
 
-<h1>Game  -  List</h1>
 
-<table class="table">
+
+<h1 style="margin-bottom:10px">Game  -  List</h1>
+
+<NavLink class="nav-link" href="AddEmployee">
+    <span class="oi oi-plus" aria-hidden="true">Add a new game</span>
+</NavLink>
+
+<table class="table" style="margin-top:10px">
         <thead>
             <tr>
                 <th>Game Name</th>  
                 <th>Release Date</th>
+                <th style="text-align:center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +26,17 @@
                 <tr>
                     <td>@game.GameName</td>
                     <td>@game.ReleaseDate?.ToString("dd MMMM yyyy")</td>
+                    <td style="text-align:center">
+                        <div class="width:150px btn-group" role="group" >
+                            <a class="nav-link" href="EditEmployee/@game.Id">
+                                <span class="oi oi-pencil" aria-hidden="true"></span>
+                            </a>
+                           
+                            <button class="oi oi-trash" @onclick="@(()=> Delete(game.Id))" aria-hidden="true" style="border:none;background-color:white;color:blue;font-size:17px"></button> 
+                        </div>                            
+                   </td>
+                           
+               
                 </tr>               
             }
         </tbody>
