@@ -1,0 +1,79 @@
+﻿@page "/EditGame/{Id}"
+@using NewBlazorServerPJ.Data
+@inject IGameServices GameServices
+@inject NavigationManager NavigationManager
+
+<h2>Edit Game</h2>
+<hr />
+
+<form>
+    <div class="row" style="margin-bottom:20px">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input form="Name" class="form-control" @bind="@game.GameName" />
+            </div>
+            <div class="form-group">
+                <label for="ReleaseDate" class="control-label">Release Date</label>
+                <input type="date" class="form-control" @bind="@game.ReleaseDate" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@Save" value="Update" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private GameModel game = new GameModel();
+    private List<GameModel> gameList = new List<GameModel>(); 
+
+    protected override async Task OnInitializedAsync()
+    {
+        game = await Task.Run(() => GameServices.GetGameById(Convert.ToInt32(Id)));
+    }
+    
+    private List<GameModel> GetAllGameList()
+    {               
+        gameList = GameServices.GetGameList();
+        return gameList;
+    }
+
+    private void Save()
+    {
+        GameServices.SaveGame(game);
+        game = new GameModel();        
+        GetAllGameList();  
+        NavigationManager.NavigateTo("/GamePage");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/GamePage");
+    }
+
+
+    //Employee obj = new Employee();
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    obj = await Task.Run(() => employeeService.GetEmployeeAsync(Convert.ToInt32(Id)));
+    //}
+    //protected async void UpdateEmployee()
+    //{
+    //    await employeeService.UpdateEmployeeAsync(obj);
+    //    NavigationManager.NavigateTo("Employees");
+    //}
+    //void Cancel()
+    //{
+    //    NavigationManager.NavigateTo("Employees");
+    //}
+}
