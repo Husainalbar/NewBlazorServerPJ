@@ -2,12 +2,12 @@
 
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
-
+<MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
+<MudText Align="Align.Left" Typo="Typo.h4" Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Counter</b></MudText>
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
+</MudCard>
 @code {
     private int currentCount = 0;
 

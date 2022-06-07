@@ -3,7 +3,8 @@
 @inject IGameServices GameServices
 @inject NavigationManager NavigationManager
 
-<h2>Add Game</h2>
+<MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
+<MudText Align="Align.Left" Typo="Typo.h4" Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Add Game</b></MudText>
 <hr />
 
 <form>
@@ -29,6 +30,7 @@
         </div>
     </div>
 </form>
+</MudCard>
 
 @code {
     private GameModel game = new GameModel();

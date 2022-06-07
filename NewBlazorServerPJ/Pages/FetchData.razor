@@ -5,8 +5,8 @@
 @using NewBlazorServerPJ.Data
 @inject WeatherForecastService ForecastService
 
-<h1>Weather forecast</h1>
-
+<MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
+<MudText Align="Align.Left" Typo="Typo.h4" Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Weather Forecast</b></MudText>
 <p>This component demonstrates fetching data from a service.</p>
 
 @if (forecasts == null)
@@ -37,7 +37,7 @@ else
         </tbody>
     </table>
 }
-
+</MudCard>
 @code {
     private WeatherForecast[]? forecasts;
 
