@@ -8,42 +8,8 @@
 <MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
 <MudText Align="Align.Left" Typo="Typo.h4" Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Game  -  List</b></MudText>
 
-<NavLink class="nav-link m-2" href="AddGame">
-    <span class="oi oi-plus" aria-hidden="true" style="margin-right:10px"></span>
-    <span aria-hidden="true" >Add a new game</span>
-</NavLink>
+<MudButton style="margin:15px" StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary" Href="/AddGame">Add a new game</MudButton>
 
-
-<table class="table" style="margin-top:10px">
-        <thead>
-            <tr>
-                <th>Games</th>  
-                <th>Release Date</th>
-                <th style="text-align:center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var game in gameList)
-            {                
-                <tr>
-                    <td>@game.GameName</td>
-                    <td>@game.ReleaseDate?.ToString("dd MMMM yyyy")</td>
-                    <td style="text-align:center">
-                        <div class="width:150px btn-group" role="group" >
-                            <a class="nav-link" href="EditGame/@game.Id">
-                                <span class="oi oi-pencil" aria-hidden="true"></span>
-                            </a>
-                           
-                            <button class="oi oi-trash" @onclick="@(()=> Delete(game.Id))" aria-hidden="true" style="border:none;background-color:white;color:blue;font-size:17px"></button> 
-                        </div>                            
-                   </td>
-                           
-               
-                </tr>               
-            }
-        </tbody>
-    </table>
-@*
 <MudSimpleTable>
     <thead>
         <MudTr>
@@ -55,49 +21,21 @@
     <tbody>      
         @foreach(var game in gameList)
         {
-            <MudTr>
+            <tr>
                 <MudTd DataLabel="Games" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.GameName</MudTd>   
                 <MudTd DataLabel="Release Date" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.ReleaseDate?.ToString("dd MMMM yyyy")</MudTd>               
-                <MudTd DataLabel="Action">
+                <MudTd DataLabel="Action">                  
                     <MudIconButton Href="@($"EditGame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Filled.Edit" Size="Size.Small"/>
                     <MudIconButton  @onclick="@(()=> Delete(game.Id))" Color="Color.Error" Icon="@Icons.Filled.Delete" Size="Size.Small"/>
                 </MudTd>
-            </MudTr>                            
+            </tr>                            
         }        
     </tbody>                
-</MudSimpleTable>*@
-@*
-<table class="table" style="margin-top:10px">
-        <thead>
-            <tr>
-                <th>Games</th>  
-                <th>Release Date</th>
-                <th style="text-align:center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var game in gameList)
-            {                
-                <tr>
-                    <td>@game.GameName</td>
-                    <td>@game.ReleaseDate?.ToString("dd MMMM yyyy")</td>
-                    <td style="text-align:center">
-                        <div class="width:150px btn-group" role="group" >
-                            <a class="nav-link" href="EditGame/@game.Id">
-                                <span class="oi oi-pencil" aria-hidden="true"></span>
-                            </a>
-                           
-                            <button class="oi oi-trash" @onclick="@(()=> Delete(game.Id))" aria-hidden="true" style="border:none;background-color:white;color:blue;font-size:17px"></button> 
-                        </div>                            
-                   </td>
-                           
-               
-                </tr>               
-            }
-        </tbody>
-    </table>*@
-
+</MudSimpleTable>
 </MudCard>
+
+
+
 
 @code {
     private GameModel game = new GameModel();
